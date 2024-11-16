@@ -32,10 +32,17 @@ pipeline {
             }
         }
 
-
+    stage('Build Docker Image frontend') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ./frontend"
+                }
+            }
+        }
        
              
-     stage('Build Docker Image') {
+     stage('Build Docker Image for backend') {
             steps {
                 script {
                     // Build the Docker image
