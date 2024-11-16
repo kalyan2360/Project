@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the Git repository
-                 sh 'cd backend'
+            
                 git branch: 'main', url: 'https://github.com/kalyan2360/Project.git'
             }
         }
