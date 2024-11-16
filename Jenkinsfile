@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-         stages {
+
         stage('Checkout') {
             steps {
                 // Clone the Git repository
@@ -68,7 +68,7 @@ pipeline {
                 }
             }
         }
-    }
+    
                    
         stage('Test') {
             steps {
