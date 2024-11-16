@@ -65,23 +65,7 @@ pipeline {
         }
     
                    
-        stage('Test') {
-            steps {
-                // Run Maven tests
-                sh 'cd backend'
-                sh 'mvn test -DskipTests=true'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                // Package the application (if not covered in the build step)
-                sh 'cd backend'
-                sh 'mvn package -DskipTests=true'
-            }
-        }
-
-        
+            
     }
 
 }
