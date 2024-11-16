@@ -1,5 +1,9 @@
 pipeline {
     agent any
+     environment {
+        DOCKER_IMAGE = 'kalyankumar1996/projectdemo' // Replace with your Docker Hub repo name
+        DOCKER_TAG = 'latest' // You can set this to dynamic values like ${env.BUILD_NUMBER}
+    }
 
     
 
@@ -28,6 +32,44 @@ pipeline {
             }
         }
 
+         stages {
+        stage('Checkout') {
+            steps {
+                // Clone the Git repository
+                git branch: 'main', url: 'https://github.com/your-repo/your-project.git'
+            }
+        }
+             
+     stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                }
+            }
+        }
+
+               stage('Login to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub using credentials
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    }
+                }
+            }
+        }
+             
+  stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push the Docker image to Docker Hub
+                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                }
+            }
+        }
+    }
+                   
         stage('Test') {
             steps {
                 // Run Maven tests
