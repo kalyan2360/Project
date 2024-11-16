@@ -33,12 +33,7 @@ pipeline {
         }
 
 
-        stage('Checkout') {
-            steps {
-                // Clone the Git repository
-                git branch: 'main', url: 'https://github.com/your-repo/your-project.git'
-            }
-        }
+       
              
      stage('Build Docker Image') {
             steps {
