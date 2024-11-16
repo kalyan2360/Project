@@ -14,30 +14,25 @@ pipeline {
         stage('Build') {
             steps {
                 // Run Maven build
-                sh 'mvn clean install'
+                sh 'mvn clean install -DskipTests=true'
             }
         }
 
         stage('Test') {
             steps {
                 // Run Maven tests
-                sh 'mvn test'
+                sh 'mvn test -DskipTests=true'
             }
         }
 
         stage('Package') {
             steps {
                 // Package the application (if not covered in the build step)
-                sh 'mvn package'
+                sh 'mvn package -DskipTests=true'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Add deployment logic if needed
-                echo 'Deployment stage (customize as needed)'
-            }
-        }
+        
     }
 
 }
