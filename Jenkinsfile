@@ -1,7 +1,7 @@
 pipeline {
     agent any
      environment {
-        DOCKER_IMAGE = 'kalyankumar1996/projectdemo' // Replace with your Docker Hub repo name
+        DOCKER_IMAGE = 'kalyankumar1996/projectdemo2' // Replace with your Docker Hub repo name
         DOCKER_TAG = 'latest' // You can set this to dynamic values like ${env.BUILD_NUMBER}
     }
 
